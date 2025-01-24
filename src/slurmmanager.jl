@@ -116,7 +116,7 @@ function launch(manager::SlurmManager, params::Dict, instances_arr::Array, c::Co
           manager.verbose && println("connecting to worker $i out of $(manager.ntasks)")
 
           line = readline(manager.srun_proc)
-          m = match(r".*:(\d*)#(.*)", line)
+          m = match(r"(?:.*:)?(\d+)#(.*)", line)
           m === nothing && error("could not parse $line")
 
           config = WorkerConfig()
