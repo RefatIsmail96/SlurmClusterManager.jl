@@ -88,7 +88,7 @@ function launch(manager::SlurmManager, params::Dict, instances_arr::Array, c::Co
         exename = params[:exename]
         exeflags = params[:exeflags]
 
-        _srun_cmd_without_env = `srun -D $exehome $exename $exeflags --worker`
+        _srun_cmd_without_env = `srun --cpu-bind=cores --unbuffered -D $exehome $exename $exeflags --worker`
 
         @static if Base.VERSION >= v"1.6.0"
           env_arr = params[:env]
